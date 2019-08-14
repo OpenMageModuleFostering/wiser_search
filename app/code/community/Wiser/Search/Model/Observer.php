@@ -41,21 +41,21 @@ class Wiser_Search_Model_Observer
 	
 	public function productAfterSave($observer){
 		$product = $observer->getProduct();
-		
-		$stores = Mage::app()->getStores();
-		$Feed 				= new Wiser_Search_Helper_XmlFeed();
-		$_Products 			= array();
-		$_Configuration		= array();
-		
-		foreach ($stores as $store)
-		{
-			array_push($_Products, Wiser_Search_Helper_ProductData::_getProductData($product->getId(), $store->getStoreId()));
-		}
-		
-		$xmlFeed = $Feed->build_xml($_Products, $_Configuration);
-		
-		// API Call to push XML to Webhook
-		$this->webhookUpdateProduct($xmlFeed, "POST");
+  
+        $stores = Mage::app()->getStores();
+        $Feed 				= new Wiser_Search_Helper_XmlFeed();
+        $_Products 			= array();
+        $_Configuration		= array();
+        
+        foreach ($stores as $store)
+        {
+            array_push($_Products, Wiser_Search_Helper_ProductData::_getProductData($product->getId(), $store->getStoreId()));
+        }
+        
+        $xmlFeed = $Feed->build_xml($_Products, $_Configuration);
+
+        // API Call to push XML to Webhook
+        $this->webhookUpdateProduct($xmlFeed, "POST");
 	}
 	
 	public function productAfterDelete($observer) {
@@ -113,13 +113,18 @@ class Wiser_Search_Model_Observer
 		if( $status == 200) {
 			$data 	= json_decode($result);
             
-			Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/api_key', $data->api_key);
-			Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/script', $data->script);
-			Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/webhook', $data->webhook);
-			
-			Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/installed', 1);
-			
-			Mage::app()->getStore()->resetConfig();
+            if( $data !== NULL ) {
+                Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/api_key', $data->api_key);
+                Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/script', $data->script);
+                Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/webhook', $data->webhook);
+                
+                Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/installed', 1);
+                
+                $stores = Mage::app()->getStores();
+                foreach ($stores as $store) {
+                    $store->resetConfig();
+                }
+            }
 		}
 	}
 	

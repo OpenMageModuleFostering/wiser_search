@@ -116,7 +116,7 @@ class Wiser_Search_IndexController extends Mage_Core_Controller_Front_Action {
 	
 	private function _buildProductsArray($storeId)
 	{
-		$this->_Products = Mage::getModel('catalog/product')->setStoreId($storeId)->getCollection();
+		$this->_Products = Mage::getModel('catalog/product')->getCollection()->setStoreId($storeId)->addWebsiteFilter(Mage::getModel('core/store')->load($storeId)->getWebsiteId());
 		$this->_Products->addAttributeToFilter('status', 1);//enabled
 		$this->_Products->addAttributeToFilter('visibility',  array('gt' => 2));// search only OR catalog, search
 		$this->_Products->addAttributeToSelect('*');

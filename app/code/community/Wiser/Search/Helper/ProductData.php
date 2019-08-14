@@ -5,6 +5,7 @@ class Wiser_Search_Helper_ProductData
 	public static function _getProductData($ProductInput, $storeId)
 	{
 		$Product = Mage::getModel('catalog/product')->setStoreId($storeId)->load($ProductInput);
+        
 		$Cats = self::_getCategories($Product, $storeId);
 		$Data = array();
 		$Data['id']=$ProductInput;
@@ -22,7 +23,24 @@ class Wiser_Search_Helper_ProductData
 		if($Data['brand'] == "No") {
 			$Data['brand'] = "";
 		}
-		$Data['availability']='yes';
+        
+        if( in_array(Mage::getModel('core/store')->load($storeId)->getWebsiteId(), $Product->getWebsiteIds() ) && $Product->getStatus() == 1 && $Product->getVisibility() > 2  ) {
+            
+            $default = Mage::getStoreConfig('cataloginventory/item_options/manage_stock', Mage::app()->getStore($storeId));
+                        
+            if(     ($Product->getStockItem()->getData("use_config_manage_stock") == 1 && $default =='0' ) 
+                    || ($Product->getStockItem()->getData("use_config_manage_stock") == 1 && $default =='1' && $Product->getIsInStock()) 
+                    || ($Product->getStockItem()->getData("use_config_manage_stock") == 0 && $Product->getStockItem()->getData("manage_stock") == '0' )
+                    || ($Product->getStockItem()->getData("use_config_manage_stock") == 0 && $Product->getStockItem()->getData("manage_stock") == '1' && $Product->getIsInStock() ) ) {
+
+                $Data['availability'] = 'yes';
+            } else {
+               $Data['availability'] = 'no';
+            }
+        } else {
+            $Data['availability'] = 'no';
+        }
+		
 		//$Data['shippingcost'] = $Config->general->shippingcost;
 		//$Data['shippingtime'] = $Config->general->shippingtime;
 
