@@ -31,6 +31,15 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</extension_version>
+                        <installation_status translate="label">
+							<label>Installation status:</label>
+							<frontend_type>label</frontend_type>
+							<comment><![CDATA[ Current installation status for Wiser Search, installation might take up to one hour. ]]></comment>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</installation_status>
 						<disabled translate="label">
 							<label>Disabled:</label>
 							<comment><![CDATA[ Disables Wiser Search ]]></comment>

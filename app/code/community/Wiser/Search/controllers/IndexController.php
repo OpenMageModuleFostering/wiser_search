@@ -27,7 +27,7 @@ class Wiser_Search_IndexController extends Mage_Core_Controller_Front_Action {
 						$helper = Mage::helper('cms');
 						$processor = $helper->getPageTemplateProcessor();
 
-						foreach( Mage::getModel('cms/page')->setStoreId($storeId)->getCollection() as $iPage ){
+						foreach( Mage::getModel('cms/page')->getCollection()->addStoreFilter($storeId) as $iPage ){
 							$_Page = array();
 							
 							$_Page['id'] = $iPage->getId();
