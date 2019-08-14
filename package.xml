@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
     <name>wiser_search</name>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <stability>stable</stability>
     <license uri="http://opensource.org/licenses/gpl-license.php">GPL</license>
     <channel>community</channel>
@@ -9,12 +9,11 @@
     <summary>Quickly have your search results on screen while typing, advanced statistics and advanced layered navigation</summary>
     <description>Show search results to your customers while typing, indexes both products and pages. Allows the webshop administrator to view advanced search statistics.</description>
     <notes>Bugfixes:&#xD;
-- Extension now filters non UTF-8 characters&#xD;
-- Removed  root category from category filter</notes>
+- added pagination in feed towards wiser search for high volume webshops</notes>
     <authors><author><name>Niels - Rejuni</name><user>niels</user><email>niels@rejuni.nl</email></author><author><name>Remco - Rejuni</name><user>remco</user><email>remco@rejuni.nl</email></author></authors>
-    <date>2016-02-04</date>
-    <time>19:20:06</time>
-    <contents><target name="magecommunity"><dir name="Wiser"><dir name="Search"><dir name="Helper"><file name="Data.php" hash="d127ac82b4dd20580f24d1bdc0eb9349"/><file name="ProductData.php" hash="1f370f53136b4089c2c884482da4e420"/><file name="SimpleXml.php" hash="ee3906507dd83a9b540e5fb2afaf767e"/><file name="XmlFeed.php" hash="259ab0f3ae673d7395db37c794f9bc02"/></dir><dir name="Model"><file name="Observer.php" hash="d2186e3c03b3495cf6dd7d0b326a5bcb"/></dir><dir name="controllers"><file name="IndexController.php" hash="db74ab3752f6057b5893a7e2c2d43033"/></dir><dir name="etc"><file name="config.xml" hash="882ea88ebe19af202f3c56ea23397dad"/><file name="system.xml" hash="89c471d8aa5eeeb294f9c2b272f5ac56"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Wiser_Search.xml" hash="4a518f78635b9e09b5b907a096b1ae91"/></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="wiser_search.xml" hash="f66cf33d0e88676e86bba6f0c561e485"/></dir><dir name="template"><dir name="wiser_search"><file name="conversion.phtml" hash="a5538d15d4f43989a2513b3449258dec"/></dir></dir></dir></dir></dir></target></contents>
+    <date>2016-02-15</date>
+    <time>18:45:57</time>
+    <contents><target name="magecommunity"><dir name="Wiser"><dir name="Search"><dir name="Helper"><file name="Data.php" hash="d127ac82b4dd20580f24d1bdc0eb9349"/><file name="ProductData.php" hash="1f370f53136b4089c2c884482da4e420"/><file name="SimpleXml.php" hash="ee3906507dd83a9b540e5fb2afaf767e"/><file name="XmlFeed.php" hash="259ab0f3ae673d7395db37c794f9bc02"/></dir><dir name="Model"><file name="Observer.php" hash="d2186e3c03b3495cf6dd7d0b326a5bcb"/></dir><dir name="controllers"><file name="IndexController.php" hash="1ee8413f5cfec6fada96e0e4c9cf60c3"/></dir><dir name="etc"><file name="config.xml" hash="882ea88ebe19af202f3c56ea23397dad"/><file name="system.xml" hash="89c471d8aa5eeeb294f9c2b272f5ac56"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Wiser_Search.xml" hash="4a518f78635b9e09b5b907a096b1ae91"/></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="wiser_search.xml" hash="f66cf33d0e88676e86bba6f0c561e485"/></dir><dir name="template"><dir name="wiser_search"><file name="conversion.phtml" hash="a5538d15d4f43989a2513b3449258dec"/></dir></dir></dir></dir></dir></target></contents>
     <compatible/>
     <dependencies><required><php><min>5.4.0.</min><max>7.0.2.</max></php></required></dependencies>
 </package>

@@ -50,7 +50,7 @@ class Wiser_Search_IndexController extends Mage_Core_Controller_Front_Action {
 						$xmlFeed = $Feed->build_xml($_Products, $_Configuration, "page");
 					} else {
 						// Product feed
-						$this->_buildProductsArray($storeId);
+						$this->_buildProductsArray($storeId, isset($_GET['pagenr']) ? (int)$_GET['pagenr'] : 1);
 						
 						foreach($this->_ProductIds as $iProduct)
 						{
@@ -118,13 +118,17 @@ class Wiser_Search_IndexController extends Mage_Core_Controller_Front_Action {
 		$this->getResponse()->setHttpResponseCode(401);
 	}
 	
-	private function _buildProductsArray($storeId)
+	private function _buildProductsArray($storeId, $pageNr)
 	{
-		$this->_Products = Mage::getModel('catalog/product')->getCollection()->setStoreId($storeId)->addWebsiteFilter(Mage::getModel('core/store')->load($storeId)->getWebsiteId());
+		$this->_Products = Mage::getModel('catalog/product')->getCollection();
+        
+        $this->_Products->setStoreId($storeId)->addWebsiteFilter(Mage::getModel('core/store')->load($storeId)->getWebsiteId());
 		$this->_Products->addAttributeToFilter('status', 1);//enabled
 		$this->_Products->addAttributeToFilter('visibility',  array('gt' => 2));// search only OR catalog, search
 		$this->_Products->addAttributeToSelect('*');
-		$this->_ProductIds = $this->_Products->getAllIds();
+        
+        $itemsPerPage = 500; 
+		$this->_ProductIds = $this->_Products->getAllIds($itemsPerPage, ($pageNr - 1) * $itemsPerPage); /* items, offset */
 	}
 	
 	private function _sendHeader() 
