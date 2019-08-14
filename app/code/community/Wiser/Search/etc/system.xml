@@ -22,6 +22,25 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
+						<extension_version translate="label">
+							<label>Version:</label>
+							<frontend_type>label</frontend_type>
+							<comment><![CDATA[ Go to <a target="_blank" href="https://app.wiser.nl/">https://app.wiser.nl/</a> for further configuration ]]></comment>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</extension_version>
+						<disabled translate="label">
+							<label>Disabled:</label>
+							<comment><![CDATA[ Disables Wiser Search ]]></comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</disabled>
                         <customer_key translate="label">
                             <label>Customer Key</label>
                             <frontend_type>text</frontend_type>

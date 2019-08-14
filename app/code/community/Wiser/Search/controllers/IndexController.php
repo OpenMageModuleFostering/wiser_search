@@ -127,7 +127,7 @@ class Wiser_Search_IndexController extends Mage_Core_Controller_Front_Action {
 		$this->_Products->addAttributeToFilter('visibility',  array('gt' => 2));// search only OR catalog, search
 		$this->_Products->addAttributeToSelect('*');
         
-        $itemsPerPage = 500; 
+        $itemsPerPage = 100; 
 		$this->_ProductIds = $this->_Products->getAllIds($itemsPerPage, ($pageNr - 1) * $itemsPerPage); /* items, offset */
 	}
 	
