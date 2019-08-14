@@ -53,21 +53,30 @@ class Wiser_Search_Helper_ProductData
 
 		$attributes = $Product->getAttributes();
 
-		foreach ($attributes as $attribute) 
-		{
-			//if ($attribute->getIsFilterable()) 
-			//{
-				if ($attribute->getFrontend()->getConfigField('input')=='multiselect') {
-					$value = $attribute->getFrontend()->getOption($Product->getData($attribute->getAttributeCode()));
-					if (is_array($value)) {
-						$value = implode('~', $value);
-					}
-					$Data[$attribute->getAttributeCode()] = $value;
-				} else {
-					$Data[$attribute->getAttributeCode()] = $attribute->getFrontend()->getValue($Product);
-				}
-			//}
-		}
+        foreach ($attributes as $attribute) 
+        {
+            //if ($attribute->getIsFilterable()) 
+            //{
+            try {
+                if ($attribute->getFrontend()->getConfigField('input')=='multiselect') {
+                    $value = $attribute->getFrontend()->getOption($Product->getData($attribute->getAttributeCode()));
+                    if (is_array($value)) {
+                        $value = implode('~', $value);
+                    }
+                    $Data[$attribute->getAttributeCode()] = $value;
+                } else {
+                    $value = $attribute->getFrontend()->getValue($Product);
+                    if (is_array($value)) {
+                        $value = implode('~', $value);
+                    }
+                    $Data[$attribute->getAttributeCode()] = $value;
+                }
+            } catch (Exception $e) {
+            //do nothing
+            }
+        //}
+        }
+
 
 		if($Data['special_price'] == '')
 		{
