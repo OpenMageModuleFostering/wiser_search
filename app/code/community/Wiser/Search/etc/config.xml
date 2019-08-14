@@ -2,10 +2,15 @@
 <config>
 	<modules>
 		<Wiser_Search>
-			<version>1.0.10</version>
+			<version>1.0.11</version>
 		</Wiser_Search>
 	</modules>
 	<global>
+	 <models>
+            <wiser_search>
+                <class>Wiser_Search_Model</class>
+            </wiser_search>
+	 </models>
 	 <helpers>
         <wiser_search>
            <class>Wiser_Search_Helper</class>
@@ -54,7 +59,7 @@
 	<default>
         <wiser_search>
             <wiser_search_group>
-                <extension_version>1.0.10</extension_version>
+                <extension_version>1.0.11</extension_version>
             </wiser_search_group>
         </wiser_search>
     </default>
@@ -77,6 +82,17 @@
         </layout>
     </frontend>
 	<adminhtml>
+		<events>
+            <controller_action_predispatch>
+                <observers>
+                    <wiser_search>
+                        <type>singleton</type>
+                        <class>Wiser_Search_Model_Observer</class>
+                        <method>controllerActionPredispatch</method>
+                    </wiser_search>
+                </observers>
+            </controller_action_predispatch>
+        </events>
 		<acl>
 			<resources>
 				<all>

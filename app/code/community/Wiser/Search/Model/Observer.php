@@ -4,6 +4,15 @@ class Wiser_Search_Model_Observer
 	private $_Products;
 	private $_ProductIds;
 	
+	public function controllerActionPredispatch($observer)
+    {
+		if(Mage::getStoreConfig('wiser_search/wiser_search_group/installation_status') !== "installed")
+        {
+            $status = $this->getInstallationStatus();
+			Mage::getSingleton('adminhtml/session')->addWarning("Wiser installation status: " . $status);
+        }
+    }
+	
 	public function cacheRefreshType($observer) {
 		$stores = Mage::app()->getStores();
 
