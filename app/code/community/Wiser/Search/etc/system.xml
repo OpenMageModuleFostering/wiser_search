@@ -22,34 +22,6 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-						<extension_version translate="label">
-							<label>Version:</label>
-							<frontend_type>label</frontend_type>
-							<comment><![CDATA[ Go to <a target="_blank" href="https://app.wiser.nl/">https://app.wiser.nl/</a> for further configuration ]]></comment>
-							<sort_order>10</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</extension_version>
-                        <installation_status translate="label">
-							<label>Installation status:</label>
-							<frontend_type>label</frontend_type>
-							<comment><![CDATA[ Current installation status for Wiser Search, installation might take up to one hour. ]]></comment>
-							<sort_order>20</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</installation_status>
-						<disabled translate="label">
-							<label>Disabled:</label>
-							<comment><![CDATA[ Disables Wiser Search ]]></comment>
-							<frontend_type>select</frontend_type>
-							<sort_order>30</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-						</disabled>
                         <customer_key translate="label">
                             <label>Customer Key</label>
                             <frontend_type>text</frontend_type>
@@ -95,16 +67,6 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </installed>
-						<reset_magento translate="label">
-							<label>Reset Wiser Installation:</label>
-							<frontend_type>button</frontend_type>
-							<frontend_model>wiser_search/adminhtml_system_config_form_button</frontend_model>
-							<comment><![CDATA[ Resets the Wiser installation. Use this button if installation errors occured. ]]></comment>
-							<sort_order>40</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</reset_magento>
                     </fields>
                 </wiser_search_group>
 		   </groups>

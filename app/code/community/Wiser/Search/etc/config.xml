@@ -1,22 +1,12 @@
 <?xml version="1.0"?>
 <config>
-	<modules>
-		<Wiser_Search>
-			<version>1.0.13</version>
-		</Wiser_Search>
-	</modules>
-	<global>
-	 <models>
-            <wiser_search>
-                <class>Wiser_Search_Model</class>
-            </wiser_search>
-	 </models>
-	 <blocks>
-		<wiser_search>
-			<class>Wiser_Search_Block</class>
-		</wiser_search>
-	</blocks>
-	 <helpers>
+  <modules>
+     <Wiser_Search>
+        <version>0.1.1</version>
+     </Wiser_Search>
+  </modules>
+  <global>
+     <helpers>
         <wiser_search>
            <class>Wiser_Search_Helper</class>
         </wiser_search>
@@ -60,14 +50,7 @@
 			  </observers>
 		</clean_catalog_images_cache_after>
 	  </events>
-	</global>
-	<default>
-        <wiser_search>
-            <wiser_search_group>
-                <extension_version>1.0.13</extension_version>
-            </wiser_search_group>
-        </wiser_search>
-    </default>
+  </global>
     <frontend>
         <routers>
             <wiser_search>
@@ -87,17 +70,6 @@
         </layout>
     </frontend>
 	<adminhtml>
-		<events>
-            <controller_action_predispatch>
-                <observers>
-                    <wiser_search>
-                        <type>singleton</type>
-                        <class>Wiser_Search_Model_Observer</class>
-                        <method>controllerActionPredispatch</method>
-                    </wiser_search>
-                </observers>
-            </controller_action_predispatch>
-        </events>
 		<acl>
 			<resources>
 				<all>
@@ -121,15 +93,4 @@
 			</resources>
 		</acl>
 	</adminhtml>
-	<admin>
-        <routers>
-            <adminhtml>
-                <args>
-                    <modules>
-                        <wisersearch after="Mage_Adminhtml">Wiser_Search</wisersearch>
-                    </modules>
-                </args>
-            </adminhtml>
-        </routers>
-    </admin>
 </config>

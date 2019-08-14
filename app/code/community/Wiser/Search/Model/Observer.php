@@ -4,15 +4,6 @@ class Wiser_Search_Model_Observer
 	private $_Products;
 	private $_ProductIds;
 	
-	public function controllerActionPredispatch($observer)
-    {
-		if(Mage::getStoreConfig('wiser_search/wiser_search_group/installation_status') !== "installed")
-        {
-            $status = $this->getInstallationStatus();
-			Mage::getSingleton('adminhtml/session')->addWarning("Wiser installation status: " . $status);
-        }
-    }
-	
 	public function cacheRefreshType($observer) {
 		$stores = Mage::app()->getStores();
 
@@ -55,22 +46,16 @@ class Wiser_Search_Model_Observer
         $Feed 				= new Wiser_Search_Helper_XmlFeed();
         $_Products 			= array();
         $_Configuration		= array();
+        
+        foreach ($stores as $store)
+        {
+            array_push($_Products, Wiser_Search_Helper_ProductData::_getProductData($product->getId(), $store->getStoreId()));
+        }
+        
+        $xmlFeed = $Feed->build_xml($_Products, $_Configuration);
 
-		if($product->getStatus() !== 2) //2 == disabled
-		{
-			foreach ($stores as $store)
-			{
-				array_push($_Products, Wiser_Search_Helper_ProductData::_getProductData($product->getId(), $store->getStoreId()));
-			}
-			$xmlFeed = $Feed->build_xml($_Products, $_Configuration);
-
-			// API Call to push XML to Webhook
-			$this->webhookUpdateProduct($xmlFeed, "POST");
-		} else {
-			$_Products 			= array(array("id" => $product->getId()));
-			$xmlFeed = $Feed->build_xml($_Products, $_Configuration);
-			$this->webhookUpdateProduct($xmlFeed, "DELETE");
-		}
+        // API Call to push XML to Webhook
+        $this->webhookUpdateProduct($xmlFeed, "POST");
 	}
 	
 	public function productAfterDelete($observer) {
@@ -92,38 +77,7 @@ class Wiser_Search_Model_Observer
 			// 
 			$this->callInstallUrl();
 		}
-        
-        if(Mage::getStoreConfig('wiser_search/wiser_search_group/installation_status') !== "installed")
-        {
-            $status = $this->getInstallationStatus();
-            Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/installation_status', $status);
-        }
 	}
-    
-    private function getInstallationStatus(){
-        $target_url 	= Mage::getStoreConfig('wiser_search/wiser_search_group/webhook') . "?mode=getstats";
-       
-        $header 		= array(
-            "Authorization: Basic " . base64_encode( Mage::getStoreConfig('wiser_search/wiser_search_group/api_key') . ":" ),
-            "Content-type: text/plain"
-        );
-        
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$target_url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-        
-        $result=curl_exec ($ch);
-        
-        $status =  curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        
-        curl_close ($ch);
-        if( $status == 200) {
-            $data 	= json_decode($result);
-            return $data->general->installation_status;
-        }
-        return "Unable to connect to " . $target_url;
-    }
 	
 	private function callInstallUrl(){
 		$target_url 	= "http://search.wiser.nl/wisersearch_webhook.aspx";
@@ -156,9 +110,9 @@ class Wiser_Search_Model_Observer
         
         curl_close ($ch);
 	
-		
 		if( $status == 200) {
 			$data 	= json_decode($result);
+            
             if( $data !== NULL ) {
                 Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/api_key', $data->api_key);
                 Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/script', $data->script);
