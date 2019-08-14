@@ -12,8 +12,15 @@ class Wiser_Search_Helper_ProductData
 		$Data['storeid'] = $storeId;
 		$Data['title']=$Product->getName();
 		$Data['description']=strip_tags($Product->getDescription());
-		$Data['price']=$Product->getPrice();
+		
+		$Data['price']=$Product->getFinalPrice();
+		
+		$Data['price_inc_tax'] = Mage::helper('tax')->getPrice($Product, $Product->getFinalPrice(), true, null, null, null, null, null, false);
+		$Data['price_ex_tax'] = Mage::helper('tax')->getPrice($Product, $Product->getFinalPrice(), false);
+		
+		$Data['tax_percent'] = $Product->getData('tax_percent');
 		$Data['special_price']=$Product->getSpecialPrice();
+		
 		$Data['link']=$Product->getProductUrl();
 		$Data['image_link']= $Product->getImage() == "no_selection" ? "" : Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'catalog/product'.$Product->getImage();
 		$Data['image_link_medium']= $Product->getImage() == "no_selection" ? "" : (string) Mage::helper('catalog/image')->init(  $Product, 'image')->resize(320, 320);
