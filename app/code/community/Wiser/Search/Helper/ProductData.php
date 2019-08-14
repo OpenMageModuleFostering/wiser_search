@@ -19,6 +19,7 @@ class Wiser_Search_Helper_ProductData
 		$Data['image_link_medium']= $Product->getImage() == "no_selection" ? "" : (string) Mage::helper('catalog/image')->init(  $Product, 'image')->resize(320, 320);
 		$Data['category'] = $Cats['main'];
 		$Data['subcategory'] = $Cats['sub'];
+        $Data['allcategories'] = $Cats['all'];
 		$Data['brand']=$Product->getResource()->getAttribute('manufacturer')->getFrontend()->getValue($Product);
         
         $parents = Mage::getResourceSingleton('catalog/product_type_configurable')->getParentIdsByChild($ProductInput);
@@ -94,6 +95,7 @@ class Wiser_Search_Helper_ProductData
 		
 		$main = array();
 		$sub = array();
+        $all = array();
 		
 		foreach($Ids as $Category)
 		{
@@ -108,9 +110,11 @@ class Wiser_Search_Helper_ProductData
 			foreach ($CategoryModel->getParentCategories() as $parent) {
                 if( $parent->getLevel() != 1 ) { // Don't show root category as category
                     $catnames[] = $parent->getName();
+                    $all[] = $parent->getName();
                 }
 			}
             $catnames[] = $CategoryModel->getName();
+            $all[] = $CategoryModel->getName();
 			
 			if(count($catnames) > 0 ){
 				array_push($main, $catnames[0]);
@@ -126,6 +130,7 @@ class Wiser_Search_Helper_ProductData
 		
 		$Categories['main'] = implode("~", $main);
 		$Categories['sub']  = implode("~", $sub);
+        $Categories['all']  = implode("~", array_unique($all));
 		
 		return $Categories;
 	}
