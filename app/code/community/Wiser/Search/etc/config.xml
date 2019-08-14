@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<Wiser_Search>
-			<version>1.0.11</version>
+			<version>1.0.12</version>
 		</Wiser_Search>
 	</modules>
 	<global>
@@ -59,7 +59,7 @@
 	<default>
         <wiser_search>
             <wiser_search_group>
-                <extension_version>1.0.11</extension_version>
+                <extension_version>1.0.12</extension_version>
             </wiser_search_group>
         </wiser_search>
     </default>

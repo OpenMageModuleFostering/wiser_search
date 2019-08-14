@@ -1,14 +1,16 @@
 <?xml version="1.0"?>
 <package>
     <name>wiser_search</name>
-    <version>1.0.11</version>
+    <version>1.0.12</version>
     <stability>stable</stability>
     <license uri="http://opensource.org/licenses/gpl-license.php">GPL</license>
     <channel>community</channel>
     <extends/>
     <summary>Quickly have your search results on screen while typing, advanced statistics and advanced layered navigation</summary>
     <description>Show search results to your customers while typing, indexes both products and pages. Allows the webshop administrator to view advanced search statistics.</description>
-    <notes>1.0.11&#xD;
+    <notes>1.0.12&#xD;
+- Added more filterable options for visibility in search&#xD;
+1.0.11&#xD;
 - Added notifications to have realtime updates in screen.&#xD;
 1.0.10&#xD;
 - Added support for affiliate stores&#xD;
@@ -18,9 +20,9 @@
 - Multi storeview content pages support added&#xD;
 </notes>
     <authors><author><name>Niels - Rejuni</name><user>niels</user><email>niels@rejuni.nl</email></author><author><name>Remco - Rejuni</name><user>remco</user><email>remco@rejuni.nl</email></author></authors>
-    <date>2016-12-10</date>
-    <time>11:12:08</time>
-    <contents><target name="magecommunity"><dir name="Wiser"><dir name="Search"><dir name="Helper"><file name="Data.php" hash="d127ac82b4dd20580f24d1bdc0eb9349"/><file name="ProductData.php" hash="f048f36f51154a9c8152e9aca2392434"/><file name="SimpleXml.php" hash="ee3906507dd83a9b540e5fb2afaf767e"/><file name="XmlFeed.php" hash="10a19d78c67c8cb85a5aada89ef0cf03"/></dir><dir name="Model"><file name="Observer.php" hash="782deb17a86b0fece973754252e1fcc0"/></dir><dir name="controllers"><file name="IndexController.php" hash="e1e329d2fc62c9cd19cc9fef8389dac3"/></dir><dir name="etc"><dir name="adminhtml"><file name="events.xml" hash="d41d8cd98f00b204e9800998ecf8427e"/></dir><file name="config.xml" hash="1d331d4f223e1a41417fd9bbd0e421c2"/><file name="system.xml" hash="5a299551f98cd4800bc8b0a8da822dce"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Wiser_Search.xml" hash="4a518f78635b9e09b5b907a096b1ae91"/></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="wiser_search.xml" hash="f66cf33d0e88676e86bba6f0c561e485"/></dir><dir name="template"><dir name="wiser_search"><file name="conversion.phtml" hash="01671ab852225eec8384d9faae183be9"/></dir></dir></dir></dir></dir></target></contents>
+    <date>2016-12-17</date>
+    <time>10:10:15</time>
+    <contents><target name="magecommunity"><dir name="Wiser"><dir name="Search"><dir name="Helper"><file name="Data.php" hash="d127ac82b4dd20580f24d1bdc0eb9349"/><file name="ProductData.php" hash="55aa4e5877b2280e1e9283c24ce51667"/><file name="SimpleXml.php" hash="ee3906507dd83a9b540e5fb2afaf767e"/><file name="XmlFeed.php" hash="10a19d78c67c8cb85a5aada89ef0cf03"/></dir><dir name="Model"><file name="Observer.php" hash="782deb17a86b0fece973754252e1fcc0"/></dir><dir name="controllers"><file name="IndexController.php" hash="e1e329d2fc62c9cd19cc9fef8389dac3"/></dir><dir name="etc"><dir name="adminhtml"><file name="events.xml" hash="d41d8cd98f00b204e9800998ecf8427e"/></dir><file name="config.xml" hash="9c0f9bdab7309af6f41303059cb08885"/><file name="system.xml" hash="5a299551f98cd4800bc8b0a8da822dce"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Wiser_Search.xml" hash="4a518f78635b9e09b5b907a096b1ae91"/></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="wiser_search.xml" hash="f66cf33d0e88676e86bba6f0c561e485"/></dir><dir name="template"><dir name="wiser_search"><file name="conversion.phtml" hash="01671ab852225eec8384d9faae183be9"/></dir></dir></dir></dir></dir></target></contents>
     <compatible/>
     <dependencies><required><php><min>5.4.0.</min><max>7.0.2.</max></php></required></dependencies>
 </package>

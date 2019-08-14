@@ -55,6 +55,10 @@ class Wiser_Search_Helper_ProductData
         } else {
             $Data['availability'] = 'no';
         }
+        
+        $Data['visibility_int'] = $Product->getVisibility();
+        $Data['visibility_bool'] = $Product->getVisibility() > 2;
+        
 		
 		//$Data['shippingcost'] = $Config->general->shippingcost;
 		//$Data['shippingtime'] = $Config->general->shippingtime;
