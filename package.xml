@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>wiser_search</name>
+    <version>1.0.0</version>
+    <stability>stable</stability>
+    <license uri="http://opensource.org/licenses/gpl-license.php">GPL</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Quickly have your search results on screen while typing, advanced statistics and advanced layered navigation</summary>
+    <description>Show search results to your customers while typing, indexes both products and pages. Allows the webshop administrator to view advanced search statistics.</description>
+    <notes>First public release</notes>
+    <authors><author><name>Niels - Rejuni</name><user>niels</user><email>niels@rejuni.nl</email></author><author><name>Remco - Rejuni</name><user>remco</user><email>remco@rejuni.nl</email></author></authors>
+    <date>2016-01-23</date>
+    <time>12:34:40</time>
+    <contents><target name="magecommunity"><dir name="Wiser"><dir name="Search"><dir name="Helper"><file name="Data.php" hash="d127ac82b4dd20580f24d1bdc0eb9349"/><file name="ProductData.php" hash="ca0faf66410e862ec458ab305af84822"/><file name="SimpleXml.php" hash="ee3906507dd83a9b540e5fb2afaf767e"/><file name="XmlFeed.php" hash="431fab80f1db76b0594f9a7daab9d9c5"/></dir><dir name="Model"><file name="Observer.php" hash="c8f5624ddc0eff63d1aaae38d4931e10"/></dir><dir name="controllers"><file name="IndexController.php" hash="5b62b72046219455d4be798c3e36e6d8"/></dir><dir name="etc"><file name="config.xml" hash="882ea88ebe19af202f3c56ea23397dad"/><file name="system.xml" hash="89c471d8aa5eeeb294f9c2b272f5ac56"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Wiser_Search.xml" hash="4a518f78635b9e09b5b907a096b1ae91"/></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="wiser_search.xml" hash="f66cf33d0e88676e86bba6f0c561e485"/></dir><dir name="template"><dir name="wiser_search"><file name="conversion.phtml" hash="a5538d15d4f43989a2513b3449258dec"/></dir></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.4.0</min><max>7.0.2.</max></php></required></dependencies>
+</package>

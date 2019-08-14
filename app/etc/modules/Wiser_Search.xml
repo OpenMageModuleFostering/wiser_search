@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Wiser_Search>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Wiser_Search>
+    </modules>
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <default>
+        <reference name="before_body_end">
+            <block type="core/template"
+                   name="wiser_search_conversion"
+                   template="wiser_search/conversion.phtml">
+				   <action method="setCacheLifetime"><s>0</s></action>
+            </block>
+        </reference>
+    </default>
+</layout>
