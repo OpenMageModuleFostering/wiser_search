@@ -16,7 +16,7 @@ class Wiser_Search_Helper_XmlFeed
 			$xml_product = $this->_add_product_fields($xml_product, $product);
 		}
 
-		return $xml_feed->as_formated_xml();
+		return $xml_feed->asXML(); // as_formated_xml
 	}
 
 	private function _add_product_fields($xml_product, $product_fields)

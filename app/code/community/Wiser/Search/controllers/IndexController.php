@@ -98,6 +98,10 @@ class Wiser_Search_IndexController extends Mage_Core_Controller_Front_Action {
 						$_Store['contentfeed'] = $store->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK) . "wiser_search/?store=" . $store->getStoreId() ."&mode=content";
 
 						$_Store['currency'] = $store->getCurrentCurrencyCode();
+                        
+                        $this->_buildProductsArray($store->getStoreId(), -1);
+                        
+                        $_Store['productcount'] = count($this->_ProductIds);
 						
 						array_push($_Products, $_Store);
 					}
@@ -118,7 +122,7 @@ class Wiser_Search_IndexController extends Mage_Core_Controller_Front_Action {
 		$this->getResponse()->setHttpResponseCode(401);
 	}
 	
-	private function _buildProductsArray($storeId, $pageNr)
+	private function _buildProductsArray($storeId, $pageNr=-1)
 	{
 		$this->_Products = Mage::getModel('catalog/product')->getCollection();
         
@@ -127,8 +131,13 @@ class Wiser_Search_IndexController extends Mage_Core_Controller_Front_Action {
 		$this->_Products->addAttributeToFilter('visibility',  array('gt' => 2));// search only OR catalog, search
 		$this->_Products->addAttributeToSelect('*');
         
-        $itemsPerPage = 100; 
-		$this->_ProductIds = $this->_Products->getAllIds($itemsPerPage, ($pageNr - 1) * $itemsPerPage); /* items, offset */
+        // All products
+        if( $pageNr == -1 ) {
+            $this->_ProductIds = $this->_Products->getAllIds();
+        } else {
+            $itemsPerPage = 100; 
+            $this->_ProductIds = $this->_Products->getAllIds($itemsPerPage, ($pageNr - 1) * $itemsPerPage); /* items, offset */
+        }
 	}
 	
 	private function _sendHeader() 

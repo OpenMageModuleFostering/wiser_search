@@ -54,7 +54,7 @@
 	<default>
         <wiser_search>
             <wiser_search_group>
-                <extension_version>1.0.4</extension_version>
+                <extension_version>1.0.5</extension_version>
             </wiser_search_group>
         </wiser_search>
     </default>

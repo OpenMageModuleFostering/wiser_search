@@ -20,6 +20,13 @@ class Wiser_Search_Helper_ProductData
 		$Data['category'] = $Cats['main'];
 		$Data['subcategory'] = $Cats['sub'];
 		$Data['brand']=$Product->getResource()->getAttribute('manufacturer')->getFrontend()->getValue($Product);
+        
+        $parents = Mage::getResourceSingleton('catalog/product_type_configurable')->getParentIdsByChild($ProductInput);
+        if( count($parents) > 0 ) {
+            $Data['mainproductid'] = implode(",", $parents);
+        } else {
+            $Data['mainproductid'] = 0;
+        }
 		if($Data['brand'] == "No") {
 			$Data['brand'] = "";
 		}
