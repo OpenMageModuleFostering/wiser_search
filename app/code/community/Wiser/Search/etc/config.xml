@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <config>
-  <modules>
-     <Wiser_Search>
-        <version>0.1.1</version>
-     </Wiser_Search>
-  </modules>
-  <global>
-     <helpers>
+	<modules>
+		<Wiser_Search>
+			<version>1.0.10</version>
+		</Wiser_Search>
+	</modules>
+	<global>
+	 <helpers>
         <wiser_search>
            <class>Wiser_Search_Helper</class>
         </wiser_search>
@@ -50,7 +50,14 @@
 			  </observers>
 		</clean_catalog_images_cache_after>
 	  </events>
-  </global>
+	</global>
+	<default>
+        <wiser_search>
+            <wiser_search_group>
+                <extension_version>1.0.10</extension_version>
+            </wiser_search_group>
+        </wiser_search>
+    </default>
     <frontend>
         <routers>
             <wiser_search>

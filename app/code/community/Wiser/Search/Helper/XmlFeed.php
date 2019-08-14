@@ -16,7 +16,7 @@ class Wiser_Search_Helper_XmlFeed
 			$xml_product = $this->_add_product_fields($xml_product, $product);
 		}
 
-		return $xml_feed->as_formated_xml();
+		return $xml_feed->asXML(); // as_formated_xml
 	}
 
 	private function _add_product_fields($xml_product, $product_fields)
@@ -34,7 +34,8 @@ class Wiser_Search_Helper_XmlFeed
 	private function _clean_string($string)
 	{
 		$string = strip_tags($string);
-		$string = str_replace(array('"',"\r\n","\n","\r","\t"), array(""," "," "," ",""), $string);
+        // iconv removes non utf8 characters this way
+		$string = iconv("UTF-8","UTF-8//IGNORE",str_replace(array('"',"\r\n","\n","\r","\t"), array(""," "," "," ",""), $string));
 		return $string;
 	}
 }

@@ -12,14 +12,29 @@ class Wiser_Search_Helper_ProductData
 		$Data['storeid'] = $storeId;
 		$Data['title']=$Product->getName();
 		$Data['description']=strip_tags($Product->getDescription());
-		$Data['price']=$Product->getPrice();
+		
+		$Data['price']=$Product->getFinalPrice();
+		
+		$Data['price_inc_tax'] = Mage::helper('tax')->getPrice($Product, $Product->getFinalPrice(), true, null, null, null, null, null, false);
+		$Data['price_ex_tax'] = Mage::helper('tax')->getPrice($Product, $Product->getFinalPrice(), false);
+		
+		$Data['tax_percent'] = $Product->getData('tax_percent');
 		$Data['special_price']=$Product->getSpecialPrice();
+		
 		$Data['link']=$Product->getProductUrl();
 		$Data['image_link']= $Product->getImage() == "no_selection" ? "" : Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'catalog/product'.$Product->getImage();
 		$Data['image_link_medium']= $Product->getImage() == "no_selection" ? "" : (string) Mage::helper('catalog/image')->init(  $Product, 'image')->resize(320, 320);
 		$Data['category'] = $Cats['main'];
 		$Data['subcategory'] = $Cats['sub'];
+        $Data['allcategories'] = $Cats['all'];
 		$Data['brand']=$Product->getResource()->getAttribute('manufacturer')->getFrontend()->getValue($Product);
+        
+        $parents = Mage::getResourceSingleton('catalog/product_type_configurable')->getParentIdsByChild($ProductInput);
+        if( count($parents) > 0 ) {
+            $Data['mainproductid'] = implode(",", $parents);
+        } else {
+            $Data['mainproductid'] = 0;
+        }
 		if($Data['brand'] == "No") {
 			$Data['brand'] = "";
 		}
@@ -46,21 +61,30 @@ class Wiser_Search_Helper_ProductData
 
 		$attributes = $Product->getAttributes();
 
-		foreach ($attributes as $attribute) 
-		{
-			//if ($attribute->getIsFilterable()) 
-			//{
-				if ($attribute->getFrontend()->getConfigField('input')=='multiselect') {
-					$value = $attribute->getFrontend()->getOption($Product->getData($attribute->getAttributeCode()));
-					if (is_array($value)) {
-						$value = implode('~', $value);
-					}
-					$Data[$attribute->getAttributeCode()] = $value;
-				} else {
-					$Data[$attribute->getAttributeCode()] = $attribute->getFrontend()->getValue($Product);
-				}
-			//}
-		}
+        foreach ($attributes as $attribute) 
+        {
+            //if ($attribute->getIsFilterable()) 
+            //{
+            try {
+                if ($attribute->getFrontend()->getConfigField('input')=='multiselect') {
+                    $value = $attribute->getFrontend()->getOption($Product->getData($attribute->getAttributeCode()));
+                    if (is_array($value)) {
+                        $value = implode('~', $value);
+                    }
+                    $Data[$attribute->getAttributeCode()] = $value;
+                } else {
+                    $value = $attribute->getFrontend()->getValue($Product);
+                    if (is_array($value)) {
+                        $value = implode('~', $value);
+                    }
+                    $Data[$attribute->getAttributeCode()] = $value;
+                }
+            } catch (Exception $e) {
+            //do nothing
+            }
+        //}
+        }
+
 
 		if($Data['special_price'] == '')
 		{
@@ -78,6 +102,7 @@ class Wiser_Search_Helper_ProductData
 		
 		$main = array();
 		$sub = array();
+        $all = array();
 		
 		foreach($Ids as $Category)
 		{
@@ -86,12 +111,17 @@ class Wiser_Search_Helper_ProductData
 			{
 				continue;
 			}
-			*/
-			$catnames = array();
+            */
 			
+			$catnames = array();
 			foreach ($CategoryModel->getParentCategories() as $parent) {
-				$catnames[] = $parent->getName();
+                if( $parent->getLevel() != 1 ) { // Don't show root category as category
+                    $catnames[] = $parent->getName();
+                    $all[] = $parent->getName();
+                }
 			}
+            $catnames[] = $CategoryModel->getName();
+            $all[] = $CategoryModel->getName();
 			
 			if(count($catnames) > 0 ){
 				array_push($main, $catnames[0]);
@@ -107,8 +137,8 @@ class Wiser_Search_Helper_ProductData
 		
 		$Categories['main'] = implode("~", $main);
 		$Categories['sub']  = implode("~", $sub);
+        $Categories['all']  = implode("~", array_unique($all));
 		
-
 		return $Categories;
 	}
 }

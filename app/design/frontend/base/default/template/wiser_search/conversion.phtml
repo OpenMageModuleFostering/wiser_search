@@ -1,1 +1,1 @@
-<script><?php echo str_replace("{languageid}", Mage::app()->getStore()->getStoreId(), Mage::getStoreConfig('wiser_search/wiser_search_group/script')); ?></script>
+<script><?php if(!Mage::getStoreConfig('wiser_search/wiser_search_group/disabled')) { echo str_replace("{languageid}", Mage::app()->getStore()->getStoreId(), Mage::getStoreConfig('wiser_search/wiser_search_group/script')); } ?></script>

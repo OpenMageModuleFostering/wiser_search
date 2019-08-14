@@ -77,7 +77,38 @@ class Wiser_Search_Model_Observer
 			// 
 			$this->callInstallUrl();
 		}
+        
+        if(Mage::getStoreConfig('wiser_search/wiser_search_group/installation_status') !== "installed")
+        {
+            $status = $this->getInstallationStatus();
+            Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/installation_status', $status);
+        }
 	}
+    
+    private function getInstallationStatus(){
+        $target_url 	= Mage::getStoreConfig('wiser_search/wiser_search_group/webhook') . "?mode=getstats";
+       
+        $header 		= array(
+            "Authorization: Basic " . base64_encode( Mage::getStoreConfig('wiser_search/wiser_search_group/api_key') . ":" ),
+            "Content-type: text/plain"
+        );
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$target_url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+        
+        $result=curl_exec ($ch);
+        
+        $status =  curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        
+        curl_close ($ch);
+        if( $status == 200) {
+            $data 	= json_decode($result);
+            return $data->general->installation_status;
+        }
+        return "Unable to connect to " . $target_url;
+    }
 	
 	private function callInstallUrl(){
 		$target_url 	= "http://search.wiser.nl/wisersearch_webhook.aspx";
