@@ -23,6 +23,11 @@ class Wiser_Search_Helper_XmlFeed
 	{
 		foreach($product_fields as $field_name => $field_value)
 		{
+            if (strpos($field_name, '_html') !== false) {
+                $field_value = $this->_clean_html($field_value);
+            } else {
+                $field_value = $this->_clean_string($field_value);
+            }
 			$field_value = $this->_clean_string($field_value);
 			$product = $xml_product->addChild($field_name, NULL);
 			$product->add_cdata($field_value);
@@ -30,7 +35,14 @@ class Wiser_Search_Helper_XmlFeed
 
 		return $xml_product;
 	}
-
+    
+    private function _clean_html($html)
+    {
+        $html = htmlentities($html);
+        $html = iconv("UTF-8","UTF-8//IGNORE",str_replace(array('"',"\r\n","\n","\r","\t"), array(""," "," "," ",""), $html));
+        return $html;
+    }
+    
 	private function _clean_string($string)
 	{
 		$string = strip_tags($string);

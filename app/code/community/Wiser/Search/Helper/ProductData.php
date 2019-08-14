@@ -28,6 +28,7 @@ class Wiser_Search_Helper_ProductData
 		$Data['subcategory'] = $Cats['sub'];
         $Data['allcategories'] = $Cats['all'];
 		$Data['brand']=$Product->getResource()->getAttribute('manufacturer')->getFrontend()->getValue($Product);
+        $Data['short_description_html']=$Product->getShortDescription();
         
         $parents = Mage::getResourceSingleton('catalog/product_type_configurable')->getParentIdsByChild($ProductInput);
         if( count($parents) > 0 ) {
@@ -57,6 +58,7 @@ class Wiser_Search_Helper_ProductData
         }
         
         $Data['visibility_int'] = $Product->getVisibility();
+        $Data['status_int'] = $Product->getStatus();
         $Data['visibility_bool'] = $Product->getVisibility() > 2;
         
 		

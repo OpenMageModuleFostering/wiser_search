@@ -35,7 +35,7 @@
 							<label>Installation status:</label>
 							<frontend_type>label</frontend_type>
 							<comment><![CDATA[ Current installation status for Wiser Search, installation might take up to one hour. ]]></comment>
-							<sort_order>10</sort_order>
+							<sort_order>20</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
@@ -44,7 +44,7 @@
 							<label>Disabled:</label>
 							<comment><![CDATA[ Disables Wiser Search ]]></comment>
 							<frontend_type>select</frontend_type>
-							<sort_order>20</sort_order>
+							<sort_order>30</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
@@ -95,6 +95,16 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </installed>
+						<reset_magento translate="label">
+							<label>Reset Wiser Installation:</label>
+							<frontend_type>button</frontend_type>
+							<frontend_model>wiser_search/adminhtml_system_config_form_button</frontend_model>
+							<comment><![CDATA[ Resets the Wiser installation. Use this button if installation errors occured. ]]></comment>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</reset_magento>
                     </fields>
                 </wiser_search_group>
 		   </groups>

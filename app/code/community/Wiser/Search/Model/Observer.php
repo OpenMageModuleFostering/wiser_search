@@ -56,15 +56,22 @@ class Wiser_Search_Model_Observer
         $_Products 			= array();
         $_Configuration		= array();
         
-        foreach ($stores as $store)
-        {
-            array_push($_Products, Wiser_Search_Helper_ProductData::_getProductData($product->getId(), $store->getStoreId()));
-        }
-        
-        $xmlFeed = $Feed->build_xml($_Products, $_Configuration);
+		die(var_dump($product->getStatus()));
+		if($product->getStatus() !== 2) //2 == disabled
+		{
+			foreach ($stores as $store)
+			{
+				array_push($_Products, Wiser_Search_Helper_ProductData::_getProductData($product->getId(), $store->getStoreId()));
+			}
+			$xmlFeed = $Feed->build_xml($_Products, $_Configuration);
 
-        // API Call to push XML to Webhook
-        $this->webhookUpdateProduct($xmlFeed, "POST");
+			// API Call to push XML to Webhook
+			$this->webhookUpdateProduct($xmlFeed, "POST");
+		} else {
+			$_Products 			= array(array("id" => $product->getId()));
+			$xmlFeed = $Feed->build_xml($_Products, $_Configuration);
+			$this->webhookUpdateProduct($xmlFeed, "DELETE");
+		}
 	}
 	
 	public function productAfterDelete($observer) {
@@ -150,9 +157,9 @@ class Wiser_Search_Model_Observer
         
         curl_close ($ch);
 	
+		
 		if( $status == 200) {
 			$data 	= json_decode($result);
-            
             if( $data !== NULL ) {
                 Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/api_key', $data->api_key);
                 Mage::getModel('core/config')->saveConfig('wiser_search/wiser_search_group/script', $data->script);

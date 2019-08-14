@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<Wiser_Search>
-			<version>1.0.12</version>
+			<version>1.0.13</version>
 		</Wiser_Search>
 	</modules>
 	<global>
@@ -11,6 +11,11 @@
                 <class>Wiser_Search_Model</class>
             </wiser_search>
 	 </models>
+	 <blocks>
+		<wiser_search>
+			<class>Wiser_Search_Block</class>
+		</wiser_search>
+	</blocks>
 	 <helpers>
         <wiser_search>
            <class>Wiser_Search_Helper</class>
@@ -59,7 +64,7 @@
 	<default>
         <wiser_search>
             <wiser_search_group>
-                <extension_version>1.0.12</extension_version>
+                <extension_version>1.0.13</extension_version>
             </wiser_search_group>
         </wiser_search>
     </default>
@@ -116,4 +121,15 @@
 			</resources>
 		</acl>
 	</adminhtml>
+	<admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <wisersearch after="Mage_Adminhtml">Wiser_Search</wisersearch>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
 </config>
