@@ -55,8 +55,7 @@ class Wiser_Search_Model_Observer
         $Feed 				= new Wiser_Search_Helper_XmlFeed();
         $_Products 			= array();
         $_Configuration		= array();
-        
-		die(var_dump($product->getStatus()));
+
 		if($product->getStatus() !== 2) //2 == disabled
 		{
 			foreach ($stores as $store)
