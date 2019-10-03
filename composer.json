@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/wiser_search",
+    "name": "OpenMageModuleFostering\/wiser_search",
     "type": "magento-module",
     "license": "GPL",
     "homepage": "",
     "description": "Quickly have your search results on screen while typing, advanced statistics and advanced layered navigation",
     "authors": [
-    {
-        "name": "Niels - Rejuni",
-        "email": "niels@rejuni.nl"
-    }
-],
+        {
+            "name": "Niels - Rejuni",
+            "email": "niels@rejuni.nl"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
